@@ -1,0 +1,6 @@
+[//]: # (References ===========================================================)
+
+
+[kallisto]: https://pachterlab.github.io/kallisto/about
+[rosmap]: https://www.synapse.org/#!Synapse:syn3219045
+[salmon]: https://combine-lab.github.io/salmon/

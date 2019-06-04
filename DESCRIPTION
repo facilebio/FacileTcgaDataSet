@@ -1,0 +1,29 @@
+Package: FacileTcgaDataSet
+Type: Package
+Title: Assembles a pan-indication, multi-assay TCGA FacileDataSet
+Version: 0.1.0
+Authors@R: c(
+    person("Steve", "Lianoglou", , "lianoglou@dnli.com", c("aut", "cre")),
+    person("Denali Therapeutics", role = c("cph", "fnd"))
+    )
+Description: This package leverages the curatedTCGAData package to create
+    a pan-cancer FacileTcgaDataSet from individual, indication-level
+    MultiAssayExperiments.
+Depends:
+    FacileData
+Imports:
+    checkmate,
+    dplyr,
+    mice,
+    tidyr
+Suggests:
+    curatedTCGAData,
+    knitr,
+    MultiAssayExperiment,
+    testthat
+Encoding: UTF-8
+LazyData: true
+Remotes:
+    denalitherapeutics/FacileData
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
