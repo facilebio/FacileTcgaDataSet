@@ -14,58 +14,99 @@ knitr::opts_chunk$set(
 
 # Overview
 
-This package leverages the MultiAssayExperiment and curatedTCGAData packages
-to download the relevant data, and assemble a singular, pan-cancer,
-FacileTcgaDataSet using a subset of the assays made availalbe from those
-resources.
+We will use the "Toil" processed data available from the [xenabrowser][xbrowser]
+to assemble and (minimally) curate a pancan TCGA dataset.
 
-Gene-level quantitaion (expression, CNV, etc) will be mapped to the
-ensembl gene-level universe. Entries that cannot be mapped that way will
-be dropped.
+Through these data, we will assemble a dataset that has these assay-level data:
 
-## Datasets
+1. estimated gene-level counts (via RSEM). (n = 10,530)
+   * tcga_gene_expected_count.gz
+   * ENSGID x TCGA-19-1787-01
+2. estimated gene-level counts by post-processing kallisto transcript level counts
+3. batch effects normalized mRNA data (n = 11,060)
+   * EB++AdjustPANCAN_IlluminaHiSeq_RNASeqV2.geneExp.xena.gz
+   * Gene symbol (or entrez?) x TCGA-OR-A5J1-01
+   * https://www.synapse.org/#!Synapse:syn4976363
+4. transcript level counts by kallisto (n = 10,535)
+5. gene-level copy number (gistic2) real valued scores
+   * Gistic2_CopyNumber_Gistic2_all_data_by_genes.gz
+   * symbol x TCGA-A5-A0GI-01
+6. gene-level copy number (gistic2) thresholded scores
+   * Gistic2_CopyNumber_Gistic2_all_thresholded.by_genes.gz
+   * (symbol x TCGA-A5-A0GI-01)
+7. RPPA (n = 7,744)
+8. gene signature (gene programs) scores (n = 10,844)
+9. gene level somatic mutation (somatic mutation (SNP and INDEL) - Gene level non-silent mutation)
+10. miRNA mature sequence expression (HiSeq) (n = 9,405)
+   * miRNA_HiSeq_gene.gz
+   * has many NAs
+   * MIMAT0019868 x TCGA-S9-A7J2-01
+11. batch correct miRNA
 
-We will create a dataset across all indications using the following assays:
+And the following clinical covariates:
 
-### mRNA Abundance
+1. curated clinical data (n = 12,591)
+   * Survival_SupplementalTable_S1_20171025_xena_sp.gz
+   * https://xenabrowser.net/datapages/?dataset=Survival_SupplementalTable_S1_20171025_xena_sp&host=https%3A%2F%2Fpancanatlas.xenahubs.net&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443
+   * http://www.cell.com/cell/fulltext/S0092-8674(18)30229-0
+      * sample (TCGA-OR-A5J1-01)
+      * patient (TCGA-OR-A5J1)
+      * "cancer type abbreviation"
+      * gender (MALE / FEMALE)
+      * ajcc_pathologic_tumor_stage (Stage II, Stage III, ...)
+      * OS / OS.time: overall survial (1/0   /  time)
+         * OS of 1 = death, 0 = alive
+         * OS.time measured in days
+      * PFI / PFI.time: progression-free interval
+      * DSS: disease-specific survival
+      * DFI: disease-free interval
+      * race
 
-The following assays can be pulled from the curatedTCGAData package:
+2. immune subtype (n=9,126)
+   * Subtype_Immune_Model_Based.txt.gz
+   * Two column table (TCGA-A5-A0GI-01, Wound Healing (Immune C1))
+3. molecular subtype (n=7,734)
+   * TCGASubtype.20170308.tsv.gz
+   * 9 column table
+      * sampleID
+      * Subtype_mRNA
+      * Subtype_DNAmeth 
+      * Subtype_protein 
+      * Subtype_miRNA 
+      * Subtype_CNA 
+      * Subtype_Integrative 
+      * Subtype_other
+      * Subtype_Selected
+4. sample type and primary disease (n=12,804)
+   * TCGA_phenotype_denseDataOnlyDownload.tsv.gz
+   * 4 column table
+      * sample (TCGA-D3-A1QA-07)
+      * sample_type_id (7)
+      * sample_type (Additional Metastatic, Metastatic, ...)
+      * _primary_disease (skin cutaneous melanoma, thyroid carcinoma, ...)
+[xbrowser]: https://xenabrowser.net/datapages/?cohort=TCGA%20Pan-Cancer%20(PANCAN)&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443
 
-* `RNASeq2GeneNorm`: fpkm values (sad)
-* `RNASeqGene`: v2 fpkm values?
-* `miRNASeqGene`: miRNA-seq data
+## TCGA Barcodes
 
-We might consider getting gene and transcript level counts from the recount2
-project, though:
+https://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/
 
-https://jhubiostatistics.shinyapps.io/recount/
+TCGA-02-0001-01C-01D-0183-01
 
-They used Gencode v25 GFF3 annotations, which we can parse with the utility
-funcionts in GemomicsStudyDb
+The pieces of the barcode follow these semantics:
 
-### Copy Number
+* TCGA: project
+* 02: TSS (tissue source site), 02 = GBM from MD anderson
+* 0001: participant (study participant)
+* [01]C: [sample type](https://gdc.cancer.gov/resources-tcga-users/tcga-code-tables/sample-type-codes)
+   * tumor types: 01 - 09
+   * normal types: 10 - 19
+   * control samples: 20-29
+* 01[C]: vial
+* [01]D: portion
+* 01[D]: analyte
+* 0182: plate
+* 01: center
 
-* `GISTIC_AllByGene`: real valued copy number per gene
-* `GISTIC_ThresholdedByGene`: threshold (duplication / deletion / normal)
-  gene-level CNV scores
+And the values for the codes can be found here:
 
-### GenomicVariants
-
-* `Mutation`: mutation status? What does this look like?
-
-### Other
-
-* `RPPAArray`: Reverse Phase Protein Array (NOISY)
-* `Methylation`, `Methylation_methyl27`, or `Methylation_methyl450`
-
-Individual indication will be downloaded separately and assembled into one
-final FacileTcgaDataSet.
-
-## Data Assembly
-
-Let's follow along with the [curatedTCGAData vignette][curatedvignette]
-to figure out how to do this.
-
-[//]: # (References ===========================================================)
-
-[curatedvignette]: http://bioconductor.org/packages/release/data/experiment/vignettes/curatedTCGAData/inst/doc/curatedTCGAData.html
+https://gdc.cancer.gov/resources-tcga-users/tcga-code-tables
