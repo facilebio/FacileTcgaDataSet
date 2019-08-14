@@ -15,6 +15,7 @@ Imports:
     checkmate,
     dplyr,
     mice,
+    stringr,
     tidyr
 Suggests:
     curatedTCGAData,
