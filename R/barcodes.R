@@ -83,7 +83,4 @@ parse_tcga_barcode <- function(x, ...) {
   W = "wga_qiagen",
   X = "wga_qiagen2")
 
-assert_tcga_barcode <- function(x, ...) {
-
-}
 

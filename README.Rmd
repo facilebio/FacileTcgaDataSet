@@ -110,3 +110,13 @@ The pieces of the barcode follow these semantics:
 And the values for the codes can be found here:
 
 https://gdc.cancer.gov/resources-tcga-users/tcga-code-tables
+
+## Gene Models
+
+The RSEM and Kallisto data were analyzed against GENCODE v23 annotations, so
+I've downloaded the following GTF and extracted all relevant metadata that
+I wanted from there.
+
+```
+ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_23/gencode.v23.annotation.gtf.gz
+```
