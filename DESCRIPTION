@@ -13,7 +13,10 @@ Depends:
     FacileData
 Imports:
     checkmate,
+    data.table,
     dplyr,
+    edgeR,
+    jsonlite,
     mice,
     stringr,
     tidyr

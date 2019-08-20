@@ -20,6 +20,6 @@ the data downloaded from xena mostly looks like: \code{TCGA-02-0002-01}
 }
 \examples{
 barcodes <- c("TCGA-CV-5976-11", "TCGA-EJ-5532-01", "TCGA-D3-A1Q7-06",
-              "TCGA-06-0211-02")
+              "TCGA-06-0211-02", "TCGA-AB-2989-03R")
 parsed <- parse_tcga_barcode(barcodes)
 }

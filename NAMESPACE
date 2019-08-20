@@ -2,7 +2,11 @@
 
 export(barcode_sample_type)
 export(parse_tcga_barcode)
+export(prep_main_gene_expression)
 import(checkmate)
 import(dplyr)
 import(tidyr)
+importFrom(edgeR,DGEList)
+importFrom(jsonlite,fromJSON)
+importFrom(readr,read_tsv)
 importFrom(stringr,str_match)

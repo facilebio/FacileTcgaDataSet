@@ -1,0 +1,36 @@
+code,description,url
+LAML,Acute Myeloid Leukemia,https://portal.gdc.cancer.gov/projects/TCGA-LAML
+ACC,Adrenocortical carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-ACC
+BLCA,Bladder Urothelial Carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-BLCA
+LGG,Brain Lower Grade Gliomahttps://portal.gdc.cancer.gov/projects/TCGA-LGG
+BRCA,Breast invasive carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-BRCA
+CESC,Cervical squamous cell carcinoma and endocervical adenocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-CESC
+CHOL,Cholangiocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-CHOL
+LCML,Chronic Myelogenous Leukemia,https://portal.gdc.cancer.gov/projects/TCGA-LCML
+COAD,Colon adenocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-COAD
+CNTL,Controls,https://portal.gdc.cancer.gov/projects/TCGA-CNTL
+ESCA,Esophageal carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-ESCA
+GBM,Glioblastoma multiforme,https://portal.gdc.cancer.gov/projects/TCGA-GBM
+HNSC,Head and Neck squamous cell carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-HNSC
+KICH,Kidney Chromophobe,https://portal.gdc.cancer.gov/projects/TCGA-KICH
+KIRC,Kidney renal clear cell carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-KIRC
+KIRP,Kidney renal papillary cell carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-KIRP
+LIHC,Liver hepatocellular carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-LIHC
+LUAD,Lung adenocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-LUAD
+LUSC,Lung squamous cell carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-LUSC
+DLBC,Lymphoid Neoplasm Diffuse Large B-cell Lymphoma,https://portal.gdc.cancer.gov/projects/TCGA-DLBC
+MESO,Mesothelioma,https://portal.gdc.cancer.gov/projects/TCGA-MESO
+OV,Ovarian serous cystadenocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-OV
+PAAD,Pancreatic adenocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-PAAD
+PCPG,Pheochromocytoma and Paraganglioma,https://portal.gdc.cancer.gov/projects/TCGA-PCPG
+PRAD,Prostate adenocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-PRAD
+READ,Rectum adenocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-READ
+SARC,Sarcoma,https://portal.gdc.cancer.gov/projects/TCGA-SARC
+SKCM,Skin Cutaneous Melanoma,https://portal.gdc.cancer.gov/projects/TCGA-SKCM
+STAD,Stomach adenocarcinoma,https://portal.gdc.cancer.gov/projects/TCGA-STAD
+TGCT,Testicular Germ Cell Tumors,https://portal.gdc.cancer.gov/projects/TCGA-TGCT
+THYM,Thymoma,https://portal.gdc.cancer.gov/projects/TCGA-THYM
+THCA,Thyroid carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-THCA
+UCS,Uterine Carcinosarcoma,https://portal.gdc.cancer.gov/projects/TCGA-UCS
+UCEC,Uterine Corpus Endometrial Carcinoma,https://portal.gdc.cancer.gov/projects/TCGA-UCEC
+UVM,Uveal Melanoma,https://portal.gdc.cancer.gov/projects/TCGA-UVM

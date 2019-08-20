@@ -19,7 +19,33 @@
 devtools::load_all(".")
 
 library(FacileData)
-library(dplyR)
+library(dplyr)
 
+xena.dir <- "~/workspace/data/FacileData/consortia/tcga/xena"
 fds.dir <- "~/workspace/data/FacileData/consortia/tcga/FacileTcgaDataSet"
 
+# 0. Load Description per indication/dataset
+ind.description <- local({
+  fn <- system.file("extdata", "tcga-indications.csv",
+                    package = "FacileTcgaDataSet")
+  info <- read.csv(fn, stringsAsFactors = FALSE)
+  out <- lapply(split(info, info$code), function(x) {
+    as.list(x[-1])
+  })
+})
+
+# 1. Parse RSEM gene expression estimates into a a list of DGELists, one DGEList
+#    per indication. The first round of sample-level covariates will be
+#    extracted from the $samples data.frame from each DGEList.
+gene.expr <- prep_main_gene_expression(xena.dir)
+gc(verbose = TRUE, full = TRUE, reset = TRUE)
+
+tcga.fds <- as.FacileDataSet(
+  gene.expr,
+  fds.dir,
+  dataset_name = "FacileTcgaDataSet",
+  dataset_meta = ind.description,
+  assay_name = "rsem_gene",
+  assay_description = "TOIL RSEM expected_count (PANCAN dataset)",
+  assay_type = "rnaseq",
+  organism = "Homo sapiens")
