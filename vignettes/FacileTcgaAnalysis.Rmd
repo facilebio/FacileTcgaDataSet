@@ -1,0 +1,43 @@
+---
+title: "Facile TCGA Analyses"
+author: "Steve Lianoglou"
+date: "5/17/2019"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to FacileAnalysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  # code or die
+  echo = TRUE,
+  # minimize verbosity
+  warning = FALSE, message = FALSE,
+  # dpi = 150, # for hires images
+  comment = "#>")
+set.seed(0xFEED)
+```
+
+```{r}
+library(ggplot2)
+theme_set(theme_bw())
+
+library(dplyr)
+library(FacileData)
+tcga <- FacileDataSet("~/workspace/data/FacileData/dockerlink/FacileTcgaDataSet")
+
+features <- filter_features(tcga, name == "ERBB2")
+
+fdat <- tcga %>%
+  filter_samples(indication %in% c("BLCA", "BRCA"), sample_type == "tumor") %>%
+  with_assay_data(features, assay_name = "rsem_gene", normalized = TRUE) %>%
+  with_assay_data(features, assay_name = "cnv_score") %>%
+  with_sample_covariates(c("indication", "sex"))
+
+ggplot(fdat, aes(cnv_score_ERBB2, ERBB2, color = sex)) +
+  geom_point() +
+  facet_wrap(~ indication)
+```
+
