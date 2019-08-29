@@ -90,6 +90,9 @@ prep_main_gene_expression <- function(xena.dir, ..., debug = FALSE) {
     # and doesn't lose any real appreciable information.
     cnts <- round(2**E[, sinfo$sample_id] - 1)
     storage.mode(cnts) <- "integer"
+    if (ind %in% c("COAD", "READ")) {
+      sinfo[["indication"]] <- "CRC"
+    }
     edgeR::DGEList(cnts, samples = sinfo, genes = ginfo)
   }, simplify = FALSE)
   dats

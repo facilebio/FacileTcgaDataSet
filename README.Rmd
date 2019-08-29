@@ -14,8 +14,14 @@ knitr::opts_chunk$set(
 
 # Overview
 
-We will use the "Toil" processed data available from the [xenabrowser][xbrowser]
-to assemble and (minimally) curate a pancan TCGA dataset.
+We will use the publically available "Toil" processed data available from the
+[xenabrowser][xbrowser] to assemble and (minimally) curate a pancan TCGA
+dataset.
+
+We thank the National Cancer Institute for generating, processing, and making
+these data available in the public domain for reuse. Please note that
+The National Cancer Institute (NCI) does not endorse this translation and no
+endorsement by NCI should be inferred.
 
 Through these data, we will assemble a dataset that has these assay-level data:
 
@@ -120,3 +126,22 @@ I wanted from there.
 ```
 ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_23/gencode.v23.annotation.gtf.gz
 ```
+
+## Colorectal Consesus Molecular Subtypes
+
+[Guinney et al. Nat Med 2015][guinneypub] published a new colorectal cancer
+(CRC) subtype classification scheme that unifies a number of previous CRC
+subtypinng efforts.
+
+In addition to the paper, they also published their work on Synapse for 
+reuse under the [Colorectal Cancer Subtyping Consortium (CRCSC)](crcsc)
+umbrella.
+
+This package uses the metadata provied in the
+[`clinical_molecular_public_all.txt`](crcscdata) file.
+
+[crcsc]: https://www.synapse.org/#!Synapse:syn2623706
+[crcscdata]: https://www.synapse.org/#!Synapse:syn4978510
+
+
+
