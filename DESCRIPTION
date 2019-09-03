@@ -25,6 +25,8 @@ Suggests:
     knitr,
     MultiAssayExperiment,
     testthat
+Remotes:
+    facileverse/FacileData
 Encoding: UTF-8
 LazyData: true
 Remotes:
